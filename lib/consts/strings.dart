@@ -19,6 +19,7 @@ const appName = "Quick Chats",
     poweredBy = "Desgined & Developed by Baaba Devs",
     cont = "Start Messaging",
     continueText = "Continue",
+    connectingLives = "connecting Lives..",
     letsConnect = "Let's Connect",
     otp = "We will send as SMS with confirmation code to your phone number",
     slogan = "join the\nrevolution\ntoday.";
