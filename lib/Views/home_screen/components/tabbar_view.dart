@@ -1,4 +1,4 @@
-import 'package:clone_chat/Views/home_screen/components/chats_components.dart';
+import 'package:clone_chat/Views/home_screen/home.dart';
 import 'package:clone_chat/consts/consts.dart';
 
 Widget tabbarView() {
@@ -25,8 +25,9 @@ Widget tabbarView() {
             borderRadius: BorderRadius.only(
               bottomLeft: Radius.circular(12),
             ),
-            color: Colors.yellow,
+            color: white,
           ),
+          child: statusComponents(),
         ),
         Container(
           decoration: const BoxDecoration(

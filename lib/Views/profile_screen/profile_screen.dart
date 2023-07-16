@@ -37,12 +37,19 @@ class ProfileScreen extends StatelessWidget {
                   ],
                 ),
               ),
+              20.heightBox,
+              const Divider(
+                color: btnColor,
+                height: 1,
+              ),
+              10.heightBox,
               ListTile(
                 leading: const Icon(
                   icPerson,
                   color: white,
                 ),
                 title: TextFormField(
+                  style: const TextStyle(color: white, fontSize: 14),
                   cursorColor: white,
                   decoration: InputDecoration(
                     border: InputBorder.none,
@@ -57,7 +64,47 @@ class ProfileScreen extends StatelessWidget {
                 ),
                 subtitle: nameSub.text.fontFamily(semiBold).gray400.make(),
               ),
-              ListTile()
+              ListTile(
+                leading: const Icon(
+                  info,
+                  color: white,
+                ),
+                title: TextFormField(
+                  style: const TextStyle(color: white, fontSize: 14),
+                  cursorColor: white,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    suffixIcon: const Icon(
+                      edite,
+                      color: white,
+                    ),
+                    label: about.text.white.make(),
+                    isDense: true,
+                    labelStyle: const TextStyle(fontFamily: semiBold),
+                  ),
+                ),
+              ),
+              ListTile(
+                leading: const Icon(
+                  call,
+                  color: white,
+                ),
+                title: TextFormField(
+                  style: const TextStyle(color: white, fontSize: 14),
+                  readOnly: true,
+                  cursorColor: white,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    // suffixIcon: const Icon(
+                    //   edite,
+                    //   color: white,
+                    // ),
+                    label: phone.text.white.make(),
+                    isDense: true,
+                    labelStyle: const TextStyle(fontFamily: semiBold),
+                  ),
+                ),
+              )
             ],
           ),
         ),

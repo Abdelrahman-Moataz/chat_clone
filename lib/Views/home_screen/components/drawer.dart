@@ -45,7 +45,8 @@ Widget drawer() {
                       onTap: () {
                         switch (index) {
                           case 0:
-                            Get.to(() => const ProfileScreen());
+                            Get.to(() => const ProfileScreen(),
+                                transition: Transition.downToUp);
                             break;
                         }
                       },

@@ -22,3 +22,8 @@ var drawerIconsList = <IconData>[
 
 const icPerson = Icons.person;
 const edite = Icons.edit;
+const info = Icons.info;
+const call = Icons.call;
+const more = Icons.more_vert_rounded;
+const video = Icons.video_call_rounded;
+const send = Icons.send;

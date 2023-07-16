@@ -33,14 +33,14 @@ Widget appbar(GlobalKey<ScaffoldState> key) {
             style:
                 TextStyle(fontFamily: bold, fontSize: 22, color: Colors.black),
           ),
-          TextSpan(
-            text: "                              $connectingLives",
-            style: TextStyle(
-                fontFamily: "lato",
-                fontSize: 12,
-                color: Vx.gray600,
-                fontWeight: FontWeight.w600),
-          ),
+          // TextSpan(
+          //   text: "                              $connectingLives",
+          //   style: TextStyle(
+          //       fontFamily: "lato",
+          //       fontSize: 12,
+          //       color: Vx.gray600,
+          //       fontWeight: FontWeight.w600),
+          // ),
         ])),
         CircleAvatar(
           backgroundColor: btnColor,

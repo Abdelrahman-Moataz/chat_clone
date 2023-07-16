@@ -1,3 +1,4 @@
+import 'package:clone_chat/Views/chat_screen/chat.dart';
 import 'package:clone_chat/consts/consts.dart';
 
 Widget chatComponents() {
@@ -8,6 +9,12 @@ Widget chatComponents() {
         itemCount: 5,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
+            onTap: () {
+              Get.to(
+                () => const ChatScreen(),
+                transition: Transition.downToUp,
+              );
+            },
             leading: CircleAvatar(
               radius: 25,
               backgroundColor: btnColor,
