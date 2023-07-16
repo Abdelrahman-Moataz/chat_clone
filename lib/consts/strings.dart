@@ -8,9 +8,20 @@ const listOfFeatures = [
   "Reliable"
 ];
 
+const drawerListTitles = [
+  "Account",
+  "Friends",
+  "Notification",
+  "Data and Storage",
+  "Help"
+];
+
 const appName = "Quick Chats",
     account = "Account",
     chats = "Chats",
+    profile = "Profile",
+    name = "Name",
+    userName = "User Name",
     status = "Status",
     camera = "camera",
     invite = "Invite a friend",
@@ -22,4 +33,6 @@ const appName = "Quick Chats",
     connectingLives = "connecting Lives..",
     letsConnect = "Let's Connect",
     otp = "We will send as SMS with confirmation code to your phone number",
+    nameSub =
+        "This is not your UserName or pin. This name will be visible to your friends",
     slogan = "join the\nrevolution\ntoday.";
