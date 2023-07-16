@@ -35,6 +35,8 @@ const appName = "Quick Chats",
     continueText = "Continue",
     connectingLives = "connecting Lives..",
     letsConnect = "Let's Connect",
+    loggedIn = "Logged In",
+    loggedOut = "Logged Out",
     otp = "We will send as SMS with confirmation code to your phone number",
     nameSub =
         "This is not your UserName or pin. This name will be visible to your friends",

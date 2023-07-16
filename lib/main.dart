@@ -1,7 +1,7 @@
-import 'package:clone_chat/Views/intro_screen/verification_screen.dart';
 import 'package:clone_chat/consts/consts.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/services.dart';
+
+import 'Views/signin_screen/signin_screen.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,7 +91,7 @@ class ChatApp extends StatelessWidget {
                           padding: const EdgeInsets.all(16),
                         ),
                         onPressed: () {
-                          Get.to(() => const VerificationScreen(),
+                          Get.to(() => const SignInScreen(),
                               transition: Transition.downToUp);
                         },
                         child: cont.text.size(16).make(),
