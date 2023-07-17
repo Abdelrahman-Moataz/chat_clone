@@ -20,53 +20,73 @@ class SignInScreen extends StatelessWidget {
           padding: const EdgeInsets.all(12),
           child: Column(
             children: [
-              /// userName Field
+              Form(
+                key: controller.formKey,
+                child: Column(
+                  children: [
+                    /// userName Field
 
-              TextFormField(
-                controller: controller.userNameController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Vx.gray400)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Vx.gray400)),
-                    prefixIcon: const Icon(
-                      Icons.phone_android_rounded,
-                      color: Vx.gray600,
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 6) {
+                          return "Please enter your UserName";
+                        }
+                        return null;
+                      },
+                      controller: controller.userNameController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Vx.gray400)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Vx.gray400)),
+                          prefixIcon: const Icon(
+                            Icons.phone_android_rounded,
+                            color: Vx.gray600,
+                          ),
+                          labelText: userName,
+                          hintText: "Alex Adem",
+                          labelStyle: const TextStyle(
+                            color: Vx.gray600,
+                            fontWeight: FontWeight.bold,
+                          )),
                     ),
-                    labelText: userName,
-                    hintText: "Alex Adem",
-                    labelStyle: const TextStyle(
-                      color: Vx.gray600,
-                      fontWeight: FontWeight.bold,
-                    )),
-              ),
-              10.heightBox,
+                    10.heightBox,
 
-              /// phone Field
+                    /// phone Field
 
-              TextFormField(
-                controller: controller.phoneController,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Vx.gray400)),
-                    focusedBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(12),
-                        borderSide: const BorderSide(color: Vx.gray400)),
-                    prefixIcon: const Icon(
-                      Icons.phone_android_rounded,
-                      color: Vx.gray600,
+                    TextFormField(
+                      validator: (value) {
+                        if (value!.isEmpty || value.length < 9) {
+                          return "Please enter your Phone Number";
+                        }
+                        return null;
+                      },
+                      controller: controller.phoneController,
+                      decoration: InputDecoration(
+                          border: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Vx.gray400)),
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(12),
+                              borderSide: const BorderSide(color: Vx.gray400)),
+                          prefixIcon: const Icon(
+                            Icons.phone_android_rounded,
+                            color: Vx.gray600,
+                          ),
+                          labelText: "Phone Number",
+                          //prefixText: "+20",
+                          hintText: "01012345678",
+                          labelStyle: const TextStyle(
+                            color: Vx.gray600,
+                            fontWeight: FontWeight.bold,
+                          )),
                     ),
-                    labelText: "Phone Number",
-                    //prefixText: "+20",
-                    hintText: "01012345678",
-                    labelStyle: const TextStyle(
-                      color: Vx.gray600,
-                      fontWeight: FontWeight.bold,
-                    )),
+                  ],
+                ),
               ),
+
               10.heightBox,
               otp.text.semiBold.size(16).gray400.make(),
 
@@ -130,12 +150,15 @@ class SignInScreen extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                     ),
                     onPressed: () async {
-                      if (controller.isOTPSent.value == false) {
-                        controller.isOTPSent.value = true;
-                        await controller.sendOTP();
-                      } else {
-                        await controller.verifyOTP(context);
+                      if (controller.formKey.currentState!.validate()) {
+                        if (controller.isOTPSent.value == false) {
+                          controller.isOTPSent.value = true;
+                          await controller.sendOTP();
+                        } else {
+                          await controller.verifyOTP(context);
+                        }
                       }
+
                       // Get.to(() => const HomeScreen(),transition: Transition.downToUp);
                     },
                     child: continueText.text.size(16).make(),

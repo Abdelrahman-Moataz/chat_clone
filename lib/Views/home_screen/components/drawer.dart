@@ -1,5 +1,6 @@
 import 'package:clone_chat/Views/profile_screen/profile.dart';
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/main.dart';
 
 Widget drawer() {
   return Drawer(
@@ -76,6 +77,10 @@ Widget drawer() {
           ),
           const Spacer(),
           ListTile(
+            onTap: () async {
+              await auth.signOut();
+              Get.offAll(() => const ChatApp());
+            },
             leading: const Icon(
               logoutIcon,
               color: white,

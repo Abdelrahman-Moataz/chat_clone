@@ -1,3 +1,4 @@
+import 'package:clone_chat/Views/home_screen/home.dart';
 import 'package:clone_chat/consts/consts.dart';
 import 'package:flutter/services.dart';
 
@@ -13,15 +14,48 @@ main() async {
   runApp(const App());
 }
 
-class App extends StatelessWidget {
+class App extends StatefulWidget {
   const App({Key? key}) : super(key: key);
+
+  @override
+  State<App> createState() => _AppState();
+}
+
+class _AppState extends State<App> {
+  var isUser = false;
+
+  checkUser() async {
+    auth.authStateChanges().listen((User? user) {
+      if (user == null && mounted) {
+        setState(() {
+          isUser = false;
+        });
+      } else {
+        setState(() {
+          isUser = true;
+        });
+      }
+    });
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    checkUser();
+  }
 
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      theme: ThemeData(fontFamily: "lato"),
+      theme: ThemeData(
+        fontFamily: "mont",
+        appBarTheme: const AppBarTheme(
+          systemOverlayStyle:
+              SystemUiOverlayStyle(statusBarColor: Colors.black38),
+        ),
+      ),
       debugShowCheckedModeBanner: false,
-      home: const ChatApp(),
+      home: isUser ? const HomeScreen() : const ChatApp(),
       title: appName,
     );
   }
