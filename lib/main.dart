@@ -51,7 +51,7 @@ class _AppState extends State<App> {
         fontFamily: "mont",
         appBarTheme: const AppBarTheme(
           systemOverlayStyle:
-              SystemUiOverlayStyle(statusBarColor: Colors.black38),
+              SystemUiOverlayStyle(statusBarColor: Colors.white),
         ),
       ),
       debugShowCheckedModeBanner: false,

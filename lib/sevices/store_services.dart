@@ -9,4 +9,8 @@ class StoreServices {
         .where('id', isEqualTo: id)
         .get();
   }
+
+  static getAllUsers() {
+    return firebaseFirestore.collection(collectionUser).snapshots();
+  }
 }

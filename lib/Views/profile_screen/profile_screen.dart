@@ -1,6 +1,10 @@
+import 'dart:io';
+
 import 'package:clone_chat/consts/consts.dart';
 import 'package:clone_chat/controllers/profile_controller.dart';
 import 'package:clone_chat/sevices/store_services.dart';
+
+import 'components/picker_dialog.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -18,8 +22,14 @@ class ProfileScreen extends StatelessWidget {
         elevation: 0.0,
         actions: [
           TextButton(
-              onPressed: () {
-                controller.updateProfile(context);
+              onPressed: () async {
+                if (controller.imagePath.isEmpty) {
+                  // if image is selected then only update the values
+                  controller.updateProfile(context);
+                } else {
+                  await controller.uploadImage();
+                  controller.updateProfile(context);
+                }
               },
               child: "Save".text.white.fontFamily(semiBold).make()),
         ],
@@ -44,23 +54,46 @@ class ProfileScreen extends StatelessWidget {
                   controller.aboutController.text = data['about'];
                   return Column(
                     children: [
-                      CircleAvatar(
-                        radius: 80,
-                        backgroundColor: btnColor,
-                        child: Stack(
-                          children: [
-                            Image.asset(icUser, color: white),
-                            const Positioned(
-                              right: 0,
-                              bottom: 20,
-                              child: CircleAvatar(
-                                child: Icon(
-                                  Icons.camera_alt_rounded,
-                                  color: white,
+                      Obx(
+                        () => CircleAvatar(
+                          radius: 80,
+                          backgroundColor: btnColor,
+                          child: Stack(
+                            children: [
+                              //when image path is empty
+                              controller.imagePath.isEmpty &&
+                                      data['image_url'] == ''
+                                  ? Image.asset(icUser, color: white)
+                                  : controller.imagePath.isNotEmpty
+                                      ? Image.file(
+                                              File(controller.imagePath.value))
+                                          .box
+                                          .roundedFull
+                                          .clip(Clip.antiAlias)
+                                          .make()
+                                      : Image.network(
+                                          data['image_url'],
+                                        )
+                                          .box
+                                          .roundedFull
+                                          .clip(Clip.antiAlias)
+                                          .make(),
+                              Positioned(
+                                right: 0,
+                                bottom: 20,
+                                child: CircleAvatar(
+                                  child: const Icon(
+                                    Icons.camera_alt_rounded,
+                                    color: white,
+                                  ).onTap(() {
+                                    Get.dialog(
+                                      pickDialog(context, controller),
+                                    );
+                                  }),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                       20.heightBox,

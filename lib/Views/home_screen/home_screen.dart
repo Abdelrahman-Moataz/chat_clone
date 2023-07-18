@@ -1,3 +1,4 @@
+import 'package:clone_chat/Views/compose_screen/compose.dart';
 import 'package:clone_chat/consts/consts.dart';
 
 import 'home.dart';
@@ -16,7 +17,10 @@ class HomeScreen extends StatelessWidget {
           drawer: drawer(),
           floatingActionButton: FloatingActionButton(
             backgroundColor: bgColor,
-            onPressed: () {},
+            onPressed: () {
+              Get.to(() => const ComposeScreen(),
+                  transition: Transition.downToUp);
+            },
             child: const Icon(edite),
           ),
           backgroundColor: bgColor,
