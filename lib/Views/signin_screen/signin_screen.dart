@@ -153,7 +153,7 @@ class SignInScreen extends StatelessWidget {
                       if (controller.formKey.currentState!.validate()) {
                         if (controller.isOTPSent.value == false) {
                           controller.isOTPSent.value = true;
-                          await controller.sendOTP();
+                          await controller.sendOTP(context);
                         } else {
                           await controller.verifyOTP(context);
                         }

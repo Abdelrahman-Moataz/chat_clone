@@ -18,13 +18,14 @@ class AuthController extends GetxController {
   String verificationID = "";
 
   // send OTP method
-  sendOTP() async {
+  sendOTP(context) async {
     phoneVerificationCompleted = (PhoneAuthCredential credential) async {
       await auth.signInWithCredential(credential);
     };
     phoneVerificationFailed = (FirebaseAuthException e) {
       if (e.code == 'invalid-phone-number') {
-        print('The provided phone number is not valid.');
+        //print('The provided phone number is not valid.');
+        VxToast.show(context, msg: "The provided phone number is not valid.");
       }
     };
     phoneCodeSent = (String verificationId, int? resendToken) {
@@ -40,7 +41,8 @@ class AuthController extends GetxController {
         codeAutoRetrievalTimeout: (String verificationId) {},
       );
     } catch (e) {
-      print(e.toString());
+      //print(e.toString());
+      VxToast.show(context, msg: e.toString());
     }
   }
 

@@ -1,5 +1,6 @@
 import 'package:clone_chat/Views/compose_screen/compose.dart';
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/controllers/home_controller.dart';
 
 import 'home.dart';
 
@@ -9,6 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final scaffoldKey = GlobalKey<ScaffoldState>();
+    var controller = Get.put(HomeController());
     return SafeArea(
       child: DefaultTabController(
         length: 3,

@@ -10,10 +10,9 @@ Widget chatComponents() {
         itemBuilder: (BuildContext context, int index) {
           return ListTile(
             onTap: () {
-              Get.to(
-                () => const ChatScreen(),
-                transition: Transition.downToUp,
-              );
+              Get.to(() => const ChatScreen(),
+                  transition: Transition.downToUp,
+                  arguments: ["Dummy username", "dummy user ID"]);
             },
             leading: CircleAvatar(
               radius: 25,

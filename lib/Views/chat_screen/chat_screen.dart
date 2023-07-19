@@ -1,10 +1,14 @@
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/controllers/chat_controller.dart';
 
 class ChatScreen extends StatelessWidget {
-  const ChatScreen({super.key});
+  const ChatScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
+    var controller = Get.put(ChatController());
     return Scaffold(
       backgroundColor: bgColor,
       appBar: AppBar(
@@ -36,7 +40,7 @@ class ChatScreen extends StatelessWidget {
                       //textAlign: TextAlign.center,
                       text: const TextSpan(children: [
                         TextSpan(
-                          text: "$userName\n",
+                          text: "''\n",
                           style: TextStyle(
                               fontFamily: semiBold,
                               fontSize: 16,

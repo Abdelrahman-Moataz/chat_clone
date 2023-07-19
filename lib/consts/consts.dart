@@ -8,6 +8,7 @@ export 'package:firebase_core/firebase_core.dart';
 export 'package:firebase_storage/firebase_storage.dart';
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';
+export 'package:shared_preferences/shared_preferences.dart';
 export 'package:velocity_x/velocity_x.dart';
 
 export 'firebase_consts.dart';
