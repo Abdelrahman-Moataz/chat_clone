@@ -3,6 +3,7 @@ import 'package:clone_chat/consts/consts.dart';
 import 'package:flutter/services.dart';
 
 import 'Views/signin_screen/signin_screen.dart';
+import 'controllers/home_controller.dart';
 
 main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -46,6 +47,7 @@ class _AppState extends State<App> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
     return GetMaterialApp(
       theme: ThemeData(
         fontFamily: "mont",

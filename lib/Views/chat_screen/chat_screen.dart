@@ -1,5 +1,7 @@
+import 'package:clone_chat/Views/chat_screen/components/chat_bubble.dart';
 import 'package:clone_chat/consts/consts.dart';
 import 'package:clone_chat/controllers/chat_controller.dart';
+import 'package:clone_chat/sevices/store_services.dart';
 
 class ChatScreen extends StatelessWidget {
   const ChatScreen({
@@ -38,15 +40,15 @@ class ChatScreen extends StatelessWidget {
                   Expanded(
                     child: RichText(
                       //textAlign: TextAlign.center,
-                      text: const TextSpan(children: [
+                      text: TextSpan(children: [
                         TextSpan(
-                          text: "''\n",
-                          style: TextStyle(
+                          text: "${controller.friendName}\n",
+                          style: const TextStyle(
                               fontFamily: semiBold,
                               fontSize: 16,
                               color: Vx.gray800),
                         ),
-                        TextSpan(
+                        const TextSpan(
                           text: "Lats Seen",
                           style: TextStyle(
                               fontFamily: semiBold,
@@ -75,54 +77,35 @@ class ChatScreen extends StatelessWidget {
               ),
             ),
             20.heightBox,
-            Expanded(
-              child: ListView.builder(
-                physics: const BouncingScrollPhysics(),
-                shrinkWrap: true,
-                itemCount: 30,
-                itemBuilder: (BuildContext context, int index) {
-                  return Directionality(
-                    textDirection:
-                        index.isEven ? TextDirection.rtl : TextDirection.ltr,
-                    child: Container(
-                      margin: const EdgeInsets.only(bottom: 8),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            backgroundColor: index.isEven ? bgColor : btnColor,
-                            child: Image.asset(
-                              icUser,
-                              color: white,
-                            ),
-                          ),
-                          30.heightBox,
-                          Expanded(
-                            child: Container(
-                              padding: const EdgeInsets.all(12),
-                              decoration: BoxDecoration(
-                                color: index.isEven ? bgColor : btnColor,
-                                borderRadius: BorderRadius.circular(12),
+            Obx(
+              () => Expanded(
+                child: controller.isLoading.value
+                    ? const Center(
+                        child: CircularProgressIndicator(
+                          valueColor: AlwaysStoppedAnimation(bgColor),
+                        ),
+                      )
+                    : StreamBuilder(
+                        stream: StoreServices.getChats(controller.chatId),
+                        builder: (BuildContext context,
+                            AsyncSnapshot<QuerySnapshot> snapshot) {
+                          if (!snapshot.hasData) {
+                            return Container(
+                              child: Center(
+                                child: "Start chat".text.make(),
                               ),
-                              child: "Hello, this is a dummy message here.."
-                                  .text
-                                  .fontFamily(semiBold)
-                                  .white
-                                  .make(),
-                            ),
-                          ),
-                          10.widthBox,
-                          Directionality(
-                              textDirection: TextDirection.ltr,
-                              child: "11:30 AM"
-                                  .text
-                                  .color(greyColor)
-                                  .size(12)
-                                  .make()),
-                        ],
+                            );
+                          } else {
+                            return ListView(
+                              children: snapshot.data!.docs
+                                  .mapIndexed((currentValue, index) {
+                                var doc = snapshot.data!.docs[index];
+                                return chatBubble(index, doc);
+                              }).toList(),
+                            );
+                          }
+                        },
                       ),
-                    ),
-                  );
-                },
               ),
             ),
             10.heightBox,
@@ -138,6 +121,7 @@ class ChatScreen extends StatelessWidget {
                           color: bgColor,
                           borderRadius: BorderRadius.circular(16)),
                       child: TextFormField(
+                        controller: controller.messageController,
                         maxLines: 1,
                         style: const TextStyle(
                           color: white,
@@ -165,11 +149,16 @@ class ChatScreen extends StatelessWidget {
                     ),
                   ),
                   20.heightBox,
-                  const CircleAvatar(
-                    backgroundColor: btnColor,
-                    child: Icon(
-                      send,
-                      color: white,
+                  GestureDetector(
+                    onTap: () {
+                      controller.sendMessage(controller.messageController.text);
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: btnColor,
+                      child: Icon(
+                        send,
+                        color: white,
+                      ),
                     ),
                   )
                 ],

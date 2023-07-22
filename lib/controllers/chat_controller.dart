@@ -10,8 +10,10 @@ class ChatController extends GetxController {
       HomeController.instance.prefs.getStringList('user_details')![0];
   var friendName = Get.arguments[0];
   var messageController = TextEditingController();
+  var isLoading = false.obs;
 
   getChatId() async {
+    isLoading(true);
     await chats
         .where('users', isEqualTo: {friendId: null, userId: null})
         .limit(1)
@@ -38,6 +40,26 @@ class ChatController extends GetxController {
             });
           }
         });
+    isLoading(false);
+  }
+
+  sendMessage(String msg) {
+    if (msg.trim().isNotEmptyAndNotNull) {
+      chats.doc(chatId).update({
+        'created_on': FieldValue.serverTimestamp(),
+        'last_msg': msg,
+        'toId': friendId,
+        'fromId': userId,
+      });
+      chats.doc(chatId).collection(collectionMessages).doc().set({
+        'created_on': FieldValue.serverTimestamp(),
+        'msg': msg,
+        'uid': userId,
+      }).then((value) {
+        //after msg is sent and saved clear the texfield
+        messageController.clear();
+      });
+    }
   }
 
   @override

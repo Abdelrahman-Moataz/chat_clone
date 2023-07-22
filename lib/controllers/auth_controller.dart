@@ -65,15 +65,13 @@ class AuthController extends GetxController {
         //store user into database
         DocumentReference store =
             FirebaseFirestore.instance.collection(collectionUser).doc(user.uid);
-        await store.set(
-          {
-            'id': user.uid,
-            'name': userNameController.text.toString(),
-            'phone': phoneController.text.toString(),
-            'about': '',
-            'image_url': '',
-          },
-        );
+        await store.set({
+          'id': user.uid,
+          'name': userNameController.text.toString(),
+          'phone': phoneController.text.toString(),
+          'about': '',
+          'image_url': '',
+        }, SetOptions(merge: true));
 
         // showing toast of login
         VxToast.show(context, msg: loggedIn);

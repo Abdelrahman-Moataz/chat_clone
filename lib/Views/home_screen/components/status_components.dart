@@ -1,5 +1,7 @@
 import 'package:clone_chat/consts/consts.dart';
 
+import '../../../controllers/home_controller.dart';
+
 Widget statusComponents() {
   return Container(
     padding: const EdgeInsets.symmetric(horizontal: 12),
@@ -10,10 +12,13 @@ Widget statusComponents() {
           leading: CircleAvatar(
             radius: 25,
             backgroundColor: btnColor,
-            child: Image.asset(
-              icUser,
-              color: white,
+            backgroundImage: NetworkImage(
+              HomeController.instance.userImage,
             ),
+            // child: Image.asset(
+            //   icUser,
+            //   color: white,
+            // ),
           ),
           title: "My Status".text.fontFamily(semiBold).color(txtColor).make(),
           subtitle: "Tap to add status update".text.gray400.make(),

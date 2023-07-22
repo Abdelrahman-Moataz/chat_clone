@@ -57,7 +57,7 @@ class ProfileScreen extends StatelessWidget {
                       Obx(
                         () => CircleAvatar(
                           radius: 80,
-                          backgroundColor: btnColor,
+                          backgroundColor: bgColor,
                           child: Stack(
                             children: [
                               //when image path is empty
@@ -82,9 +82,11 @@ class ProfileScreen extends StatelessWidget {
                                 right: 0,
                                 bottom: 20,
                                 child: CircleAvatar(
+                                  radius: 15,
                                   child: const Icon(
                                     Icons.camera_alt_rounded,
                                     color: white,
+                                    size: 15,
                                   ).onTap(() {
                                     Get.dialog(
                                       pickDialog(context, controller),

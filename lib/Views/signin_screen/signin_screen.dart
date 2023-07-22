@@ -28,7 +28,7 @@ class SignInScreen extends StatelessWidget {
 
                     TextFormField(
                       validator: (value) {
-                        if (value!.isEmpty || value.length < 6) {
+                        if (value!.isEmpty || value.length < 3) {
                           return "Please enter your UserName";
                         }
                         return null;

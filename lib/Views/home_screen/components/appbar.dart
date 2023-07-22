@@ -1,4 +1,5 @@
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/controllers/home_controller.dart';
 
 Widget appbar(GlobalKey<ScaffoldState> key) {
   return Container(
@@ -45,11 +46,12 @@ Widget appbar(GlobalKey<ScaffoldState> key) {
         CircleAvatar(
           backgroundColor: btnColor,
           radius: 25,
-          child: Image.asset(
-            icUser,
-            color: white,
-          ),
-        ),
+          backgroundImage: NetworkImage(HomeController.instance.userImage),
+          // child: Image.network(
+          //   HomeController.instance.userImage,
+          //   fit: BoxFit.cover,
+          // ).box.roundedFull.clip(Clip.antiAlias).make(),
+        ).box.roundedFull.clip(Clip.antiAlias).make(),
       ],
     ),
   );

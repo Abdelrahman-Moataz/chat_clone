@@ -1,5 +1,6 @@
 import 'package:clone_chat/Views/profile_screen/profile.dart';
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/controllers/home_controller.dart';
 import 'package:clone_chat/main.dart';
 
 Widget drawer() {
@@ -24,14 +25,21 @@ Widget drawer() {
           20.heightBox,
           CircleAvatar(
             radius: 45,
-            backgroundColor: btnColor,
-            child: Image.asset(
-              icUser,
-              color: white,
+            //backgroundColor: btnColor,
+            backgroundImage: NetworkImage(
+              HomeController.instance.userImage,
             ),
-          ),
+            // child: Image.network(
+            //   HomeController.instance.userImage,
+            //   fit: BoxFit.fitWidth,
+            // ),
+          ).box.roundedFull.clip(Clip.antiAlias).make(),
           20.heightBox,
-          userName.text.fontFamily(semiBold).white.size(16).make(),
+          HomeController.instance.userName.text
+              .fontFamily(semiBold)
+              .white
+              .size(16)
+              .make(),
           20.heightBox,
           const Divider(
             color: btnColor,

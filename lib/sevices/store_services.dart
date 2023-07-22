@@ -13,4 +13,21 @@ class StoreServices {
   static getAllUsers() {
     return firebaseFirestore.collection(collectionUser).snapshots();
   }
+
+  static getChats(String chatId) {
+    return firebaseFirestore
+        .collection(collectionChats)
+        .doc(chatId)
+        .collection(collectionMessages)
+        .orderBy('created_on', descending: false)
+        .snapshots();
+  }
+
+  static getMessages() {
+    return firebaseFirestore
+        .collection(collectionChats)
+        .where("user.${currentUser!.uid}")
+        .where("created_on", isNotEqualTo: null)
+        .snapshots();
+  }
 }
