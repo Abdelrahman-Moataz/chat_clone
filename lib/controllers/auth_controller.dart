@@ -1,5 +1,6 @@
 import 'package:clone_chat/Views/home_screen/home.dart';
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/controllers/profile_controller.dart';
 
 class AuthController extends GetxController {
   // text controller
@@ -65,13 +66,15 @@ class AuthController extends GetxController {
         //store user into database
         DocumentReference store =
             FirebaseFirestore.instance.collection(collectionUser).doc(user.uid);
-        await store.set({
-          'id': user.uid,
-          'name': userNameController.text.toString(),
-          'phone': phoneController.text.toString(),
-          'about': '',
-          'image_url': '',
-        }, SetOptions(merge: true));
+        await store.set(
+          {
+            'id': user.uid,
+            'name': userNameController.text.toString(),
+            'phone': phoneController.text.toString(),
+            'about': '',
+            'image_url': ProfileController().imageLink,
+          },
+        );
 
         // showing toast of login
         VxToast.show(context, msg: loggedIn);

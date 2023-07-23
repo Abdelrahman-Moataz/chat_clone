@@ -1,6 +1,8 @@
 import 'package:clone_chat/consts/consts.dart';
 import 'package:intl/intl.dart' as intl;
 
+import '../../../controllers/home_controller.dart';
+
 Widget chatBubble(index, DocumentSnapshot doc) {
   var t =
       doc['created_on'] == null ? DateTime.now() : doc['created_on'].toDate();
@@ -16,10 +18,9 @@ Widget chatBubble(index, DocumentSnapshot doc) {
           CircleAvatar(
             backgroundColor:
                 doc['uid'] == currentUser!.uid ? bgColor : btnColor,
-            child: Image.asset(
-              icUser,
-              color: white,
-            ),
+            backgroundImage: NetworkImage(doc['uid'] == currentUser!.uid
+                ? HomeController.instance.userImage
+                : HomeController.instance.friendImage),
           ),
           30.heightBox,
           Expanded(

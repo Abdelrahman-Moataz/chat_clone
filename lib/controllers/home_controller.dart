@@ -7,6 +7,9 @@ class HomeController extends GetxController {
   String userName = '';
   String userImage = '';
 
+  String friendName = '';
+  String friendImage = '';
+
   getUserDetails() async {
     await firebaseFirestore
         .collection(collectionUser)
@@ -18,7 +21,23 @@ class HomeController extends GetxController {
       prefs = await SharedPreferences.getInstance();
       prefs.setStringList('user_details', [
         value.docs[0]['name'],
-        value.docs[0]['image_url'],
+        value.docs[1]['image_url'],
+      ]);
+    });
+  }
+
+  getFriendDetails() async {
+    await firebaseFirestore
+        .collection(collectionUser)
+        .where('id', isNotEqualTo: currentUser!.uid)
+        .get()
+        .then((value) async {
+      friendName = value.docs[0]['name'];
+      friendImage = value.docs[0]['image_url'];
+      prefs = await SharedPreferences.getInstance();
+      prefs.setStringList('user_details', [
+        value.docs[0]['name'],
+        value.docs[1]['image_url'],
       ]);
     });
   }

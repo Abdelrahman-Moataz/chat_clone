@@ -1,8 +1,8 @@
 import 'package:clone_chat/consts/consts.dart';
 
 Widget tabBar() {
-  return Container(
-    child: const RotatedBox(
+  return const SizedBox(
+    child: RotatedBox(
       quarterTurns: 3,
       child: TabBar(
         labelColor: white,

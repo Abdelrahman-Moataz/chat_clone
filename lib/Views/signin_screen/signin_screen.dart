@@ -57,6 +57,7 @@ class SignInScreen extends StatelessWidget {
                     /// phone Field
 
                     TextFormField(
+                      keyboardType: TextInputType.number,
                       validator: (value) {
                         if (value!.isEmpty || value.length < 9) {
                           return "Please enter your Phone Number";

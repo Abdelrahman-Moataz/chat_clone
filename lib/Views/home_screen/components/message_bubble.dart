@@ -1,4 +1,5 @@
 import 'package:clone_chat/consts/consts.dart';
+import 'package:clone_chat/controllers/home_controller.dart';
 import 'package:intl/intl.dart' as intl;
 
 import '../../chat_screen/chat_screen.dart';
@@ -22,10 +23,9 @@ Widget messageBubble(DocumentSnapshot doc) {
       leading: CircleAvatar(
         radius: 25,
         backgroundColor: btnColor,
-        child: Image.asset(
-          icUser,
-          color: white,
-        ),
+        backgroundImage: NetworkImage(currentUser!.uid != doc['toId']
+            ? HomeController.instance.userImage
+            : HomeController.instance.friendImage),
       ),
       title: currentUser!.uid == doc['toId']
           ? "${doc['user_name']}".text.fontFamily(semiBold).size(14).make()

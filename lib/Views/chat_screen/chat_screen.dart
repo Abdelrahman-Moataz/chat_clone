@@ -42,19 +42,19 @@ class ChatScreen extends StatelessWidget {
                       //textAlign: TextAlign.center,
                       text: TextSpan(children: [
                         TextSpan(
-                          text: "${controller.friendName}\n",
+                          text: controller.friendName,
                           style: const TextStyle(
                               fontFamily: semiBold,
                               fontSize: 16,
                               color: Vx.gray800),
                         ),
-                        const TextSpan(
-                          text: "Lats Seen",
-                          style: TextStyle(
-                              fontFamily: semiBold,
-                              fontSize: 12,
-                              color: txtColor),
-                        ),
+                        // const TextSpan(
+                        //   text: "Lats Seen",
+                        //   style: TextStyle(
+                        //       fontFamily: semiBold,
+                        //       fontSize: 12,
+                        //       color: txtColor),
+                        // ),
                       ]),
                     ),
                   ),

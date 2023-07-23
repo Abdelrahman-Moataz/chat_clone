@@ -33,7 +33,7 @@ class ChatController extends GetxController {
               'created_on': null,
               'last_msg': '',
             }).then((value) {
-              //assign the doc id to our chatid var
+              //assign the doc id to our chatId var
               {
                 chatId = value.id;
               }

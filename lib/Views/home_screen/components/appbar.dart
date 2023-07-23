@@ -56,3 +56,9 @@ Widget appbar(GlobalKey<ScaffoldState> key) {
     ),
   );
 }
+
+// const Center(
+// child: CircularProgressIndicator(
+// valueColor: AlwaysStoppedAnimation(bgColor),
+// ),
+// );

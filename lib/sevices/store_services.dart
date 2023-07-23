@@ -11,7 +11,10 @@ class StoreServices {
   }
 
   static getAllUsers() {
-    return firebaseFirestore.collection(collectionUser).snapshots();
+    return firebaseFirestore
+        .collection(collectionUser)
+        .where("id", isNotEqualTo: currentUser!.uid)
+        .snapshots();
   }
 
   static getChats(String chatId) {
